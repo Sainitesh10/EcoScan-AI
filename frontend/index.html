@@ -1,29 +1,50 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoGen AI - Waste Intelligence</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/style.css?v=3">
 </head>
 <body>
+    <!-- Animated Cyber-Eco Background -->
+    <div class="bg-animation"></div>
+    
+    <!-- Floating Trash Container -->
+    <div class="trash-container pointer-events-none">
+        <div class="trash-item" style="top: 15%; animation-duration: 12s; animation-delay: -3s;">🥤</div>
+        <div class="trash-item" style="top: 45%; animation-duration: 15s; animation-delay: -8s;">📦</div>
+        <div class="trash-item" style="top: 75%; animation-duration: 10s; animation-delay: -2s;">🥫</div>
+        <div class="trash-item" style="top: 25%; animation-duration: 14s; animation-delay: -11s;">📰</div>
+        <div class="trash-item" style="top: 65%; animation-duration: 18s; animation-delay: -5s;">🍾</div>
+        <div class="trash-item" style="top: 85%; animation-duration: 16s; animation-delay: -14s;">🛍️</div>
+        <div class="trash-item" style="top: 35%; animation-duration: 13s; animation-delay: -7s;">🍎</div>
+        <div class="trash-item" style="top: 55%; animation-duration: 11s; animation-delay: -1s;">🛒</div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loader"></div>
+        <div class="loading-text">ANALYZING WASTE DATA...</div>
+    </div>
 
     <!-- Header -->
-    <div class="custom-header">
-        <div class="logo-container">
-            <div class="logo-icon">♻️</div>
-            <div class="logo-text">
-                <h1>EcoGen AI</h1>
-                <p>Waste-to-Resource Intelligence</p>
+    <div class="container">
+        <div class="custom-header glass-panel">
+            <div class="logo-container">
+                <div class="logo-icon">♻️</div>
+                <div class="logo-text">
+                    <h1>EcoScan AI</h1>
+                    <p>Waste-to-Resource Intelligence</p>
+                </div>
+            </div>
+            <div class="nav-badges">
+                <div class="nav-item">🍃 Eco-Friendly</div>
+                <div class="nav-item">🛡️ Human-Safe</div>
+                <div class="nav-item">❤️ Social Impact</div>
             </div>
         </div>
-        <div class="nav-badges">
-            <div class="nav-item">🍃 Eco-Friendly</div>
-            <div class="nav-item">🛡️ Human-Safe</div>
-            <div class="nav-item">❤️ Social Impact</div>
-        </div>
-        <button id="theme-toggle" class="theme-toggle">🌙</button>
     </div>
 
     <!-- Hero / Upload Section -->
@@ -34,128 +55,167 @@
                 <span class="hero-highlight">Valuable Resources</span>
             </div>
             <p class="hero-subtitle">
-                Upload any item and our AI will analyze it, assess safety, and generate 
-                personalized eco-friendly upcycling ideas.
+                Upload any item and our Computer Vision AI will assess safety, analyze materials, and generate personalized eco-friendly upcycling ideas.
             </p>
         </div>
 
-        <div class="upload-section">
+        <div class="upload-section glass-panel">
             <div class="tabs">
                 <button id="tab-upload" class="tab-btn active">📁 Upload Image</button>
-                <button id="tab-camera" class="tab-btn">📸 Use Camera</button>
+                <button id="tab-camera" class="tab-btn">📸 Live Camera</button>
             </div>
 
             <!-- File Upload Area -->
             <div id="upload-area">
                 <div class="upload-area">
                     <input type="file" id="file-input" accept="image/*" style="display: none;">
-                    <button onclick="document.getElementById('file-input').click()" class="btn-primary" style="background: none; color: var(--primary-600); border: 2px solid var(--primary-100);">
-                        Select Image
+                    <button onclick="document.getElementById('file-input').click()" class="btn-primary" style="background: rgba(16, 185, 129, 0.1); color: var(--primary-bright); border: 1px solid var(--primary-glow); box-shadow: none;">
+                        SELECT IMAGE
                     </button>
-                    <p style="margin-top: 1rem; color: var(--text-600); font-size: 0.9rem;">JPG, PNG up to 10MB</p>
+                    <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.9rem;">JPG, PNG up to 100MB</p>
                 </div>
             </div>
 
             <!-- Camera Area -->
             <div id="camera-area" class="hidden">
-                <video id="camera-preview" autoplay playsinline></video>
-                <button id="capture-btn" class="btn-primary" style="margin-bottom: 1rem;">Capture Photo</button>
+                <video id="camera-preview" autoplay playsinline style="width: 100%; border-radius: var(--radius-lg); border: 1px solid var(--glass-border); margin-bottom: 1.5rem;"></video>
+                <button id="capture-btn" class="btn-primary">CAPTURE PHOTO</button>
             </div>
 
-            <img id="image-preview" class="hidden" style="max-width: 100%; border-radius: 0.5rem; margin-bottom: 1rem;">
+            <img id="image-preview" class="hidden" style="max-width: 100%; border-radius: var(--radius-lg); margin-top: 1.5rem; margin-bottom: 1.5rem; border: 2px solid var(--primary-glow); box-shadow: var(--shadow-glow);">
 
-            <button id="analyze-btn" class="btn-primary" disabled>✨ Analyze with AI</button>
+            <div style="margin-top: 2rem;">
+                <button id="analyze-btn" class="btn-primary" disabled>✨ INITIALIZE AI ANALYSIS ✨</button>
+            </div>
         </div>
 
         <!-- Features Grid -->
         <div class="features-grid">
-            <div class="result-card" style="text-align: center;">
-                <div style="font-size: 2rem; margin-bottom: 1rem;">✨</div>
-                <h3>AI-Powered Analysis</h3>
-                <p style="color: var(--text-600); font-size: 0.9rem;">Computer vision identifies objects and assesses material composition</p>
+            <div class="result-card glass-panel" style="text-align: center;">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem; filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.5));">👁️</div>
+                <h3>Computer Vision</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Advanced neural networks identify materials and assess structural integrity instantly.</p>
             </div>
-            <div class="result-card" style="text-align: center;">
-                <div style="font-size: 2rem; margin-bottom: 1rem;">🛡️</div>
-                <h3>Safety First</h3>
-                <p style="color: var(--text-600); font-size: 0.9rem;">Every recommendation is checked for human safety and eco-friendliness</p>
+            <div class="result-card glass-panel" style="text-align: center;">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem; filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.5));">🛡️</div>
+                <h3>Safety Protocol</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Every recommendation passes through strict human-safety and eco-toxicity checks.</p>
             </div>
-            <div class="result-card" style="text-align: center;">
-                <div style="font-size: 2rem; margin-bottom: 1rem;">📈</div>
-                <h3>Real Impact</h3>
-                <p style="color: var(--text-600); font-size: 0.9rem;">Track CO₂ savings and environmental impact of your upcycling projects</p>
+            <div class="result-card glass-panel" style="text-align: center;">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem; filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.5));">📈</div>
+                <h3>Carbon Tracking</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Quantify your environmental impact with calculated CO₂ savings metrics.</p>
             </div>
         </div>
     </div>
 
     <!-- Dashboard Section -->
     <div id="dashboard-section" class="container hidden">
-        <button id="back-btn" style="background: none; border: none; color: var(--text-600); cursor: pointer; margin-bottom: 1rem; font-size: 1rem;">
-            ← Analyze Another Item
+        <button id="back-btn" class="tab-btn" style="margin-bottom: 2rem; display: inline-flex; align-items: center; gap: 0.5rem;">
+            ← SCAN ANOTHER ITEM
         </button>
 
         <div class="dashboard">
-            <!-- Left Column -->
+            <!-- Left Column: Vision Data -->
             <div class="left-col">
-                <div class="result-card">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                        <h3 id="res-title" style="font-size: 1.5rem; font-weight: 700; margin: 0;">Object</h3>
-                        <span class="badge badge-emerald">Recyclable</span>
-                    </div>
-                    <img id="res-image" style="width: 100%; border-radius: 0.75rem; margin-bottom: 1rem;">
-                    
-                    <div style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
-                        <span style="color: var(--text-600);">Verdict</span>
-                        <span id="res-verdict" style="font-weight: 500;">Reusable</span>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; padding: 0.5rem 0;">
-                        <span style="color: var(--text-600);">Materials</span>
-                        <span id="res-materials" style="font-weight: 500; text-align: right;">Plastic</span>
+                <div class="result-card glass-panel">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <h3 id="res-title" style="font-size: 1.5rem; font-weight: 800; margin: 0; color: var(--primary-bright);">Subject Detected</h3>
+                        <span class="badge badge-emerald">Verified</span>
                     </div>
                     
-                    <div id="res-safety" style="margin-top: 1rem; padding: 0.75rem; background: var(--primary-50); border: 1px solid var(--primary-100); border-radius: 9999px; display: flex; align-items: center; justify-content: center; color: var(--primary-700); font-weight: 600;">
-                        🛡️ Safety Score: 95/100
+                    <img id="res-image" style="width: 100%; border-radius: var(--radius-lg); margin-bottom: 1.5rem; border: 1px solid var(--glass-border);">
+                    
+                    <div style="background: rgba(0,0,0,0.3); border-radius: var(--radius-md); padding: 1rem;">
+                        <div style="display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <span style="color: var(--text-muted);">Verdict</span>
+                            <span id="res-verdict" style="font-weight: 700; color: var(--text-main);">Evaluating...</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 0.75rem 0;">
+                            <span style="color: var(--text-muted);">Composition</span>
+                            <span id="res-materials" style="font-weight: 600; text-align: right; color: var(--text-main);">Analyzing...</span>
+                        </div>
+                    </div>
+                    
+                    <div id="res-safety" style="margin-top: 1.5rem; padding: 1rem; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: var(--primary-bright); font-weight: 700; box-shadow: inset 0 0 15px rgba(16, 185, 129, 0.1);">
+                        🛡️ SAFETY PROTOCOL: PASS
                     </div>
                 </div>
 
-                <div class="impact-card">
-                    <div class="impact-title">🍃 Environmental Impact</div>
+                <div class="impact-card glass-panel">
+                    <div class="impact-title">🍃 CARBON IMPACT DATA</div>
                     <div class="impact-row">
-                        <span>CO₂ per kg</span>
-                        <span id="res-co2-unit">0.5 kg</span>
+                        <span>CO₂ Prevented (per kg)</span>
+                        <span id="res-co2-unit" style="font-weight: 700;">--</span>
                     </div>
                     <div class="impact-row">
-                        <span>Total Potential</span>
-                        <span id="res-co2-total">1.25 kg</span>
+                        <span>Total Potential Impact</span>
+                        <span id="res-co2-total" style="font-weight: 700; color: var(--primary-bright);">--</span>
                     </div>
                 </div>
 
-                <div class="result-card" style="margin-top: 1.5rem; background: linear-gradient(135deg, #fef08a, #fde047); border: 1px solid #eab308;">
+                <div class="result-card glass-panel" style="background: rgba(245, 158, 11, 0.05); border-color: rgba(245, 158, 11, 0.3);">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <div>
-                            <h4 style="margin: 0 0 0.5rem 0; color: #854d0e;">💰 Market Price</h4>
-                            <p id="res-price-range" style="margin: 0; font-size: 1.25rem; font-weight: 600; color: #854d0e;">₹250 - ₹350</p>
-                            <p id="res-price-confidence" style="margin: 0.25rem 0 0 0; font-size: 0.8rem; color: #b45309;">Confidence: High</p>
+                            <h4 style="margin: 0 0 0.5rem 0; color: var(--accent-gold); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">💰 Market Valuation</h4>
+                            <p id="res-price-range" style="margin: 0; font-size: 1.5rem; font-weight: 800; color: #fde68a;">Analyzing...</p>
+                            <p id="res-price-confidence" style="margin: 0.5rem 0 0 0; font-size: 0.75rem; color: #fbbf24; text-transform: uppercase;">Confidence: Computing</p>
                         </div>
-                        <div style="font-size: 2.5rem;">💎</div>
+                        <div style="font-size: 3rem; filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.4));">💎</div>
                     </div>
-                </div>
-
-                <div class="result-card" style="margin-top: 1rem;">
-                    <h4 style="margin-top: 0;">📝 Condition Summary</h4>
-                    <p id="res-condition" style="color: var(--text-600); font-size: 0.9rem; margin-bottom: 0;">Good condition.</p>
                 </div>
             </div>
 
-            <!-- Right Column -->
+            <!-- Right Column: AI Output -->
             <div class="right-col">
-                <h3 style="margin-top: 0;">AI-Generated Eco Ideas</h3>
+                <div class="glass-panel" style="padding: 1.5rem 2rem; margin-bottom: 1.5rem; background: linear-gradient(90deg, rgba(16, 185, 129, 0.1), transparent);">
+                    <h3 style="margin: 0; font-size: 1.25rem; color: var(--text-main); display: flex; align-items: center; gap: 0.75rem;">
+                        <span style="font-size: 1.5rem;">✨</span>
+                        AI Generated Upcycle Instructions
+                    </h3>
+                </div>
+
+                <div class="result-card glass-panel" style="margin-bottom: 1.5rem;">
+                    <h4 style="margin: 0 0 1rem 0; color: var(--primary-bright); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">📝 Structural Assessment</h4>
+                    <p id="res-condition" style="color: var(--text-muted); font-size: 1rem; margin: 0; line-height: 1.6;">Generating structural analysis...</p>
+                </div>
+
                 <div id="suggestions-container">
-                    <!-- Dynamic Suggestions -->
+                    <!-- Dynamic Suggestions Will Spawn Here -->
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Need to add loading state JS functionality to script.js -->
+    <script>
+        // Intercept analyze button to show the cool loading overlay
+        document.addEventListener('DOMContentLoaded', () => {
+            const analyzeBtn = document.getElementById('analyze-btn');
+            const originalClick = analyzeBtn.onclick;
+            
+            // Note: script.js actually attaches an event listener, so we just mutate the DOM state
+            // to show the overlay when the button is clicked and hide it when results arrive.
+            
+            // We'll let script.js handle the actual API call, but we can hook into the UI
+            analyzeBtn.addEventListener('click', () => {
+                if(!analyzeBtn.disabled) {
+                    document.getElementById('loading-overlay').classList.add('active');
+                }
+            });
+            
+            // Setup a MutationObserver to hide loading overlay when dashboard appears
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.target.id === 'dashboard-section' && !mutation.target.classList.contains('hidden')) {
+                        document.getElementById('loading-overlay').classList.remove('active');
+                    }
+                });
+            });
+            
+            observer.observe(document.getElementById('dashboard-section'), { attributes: true, attributeFilter: ['class'] });
+        });
+    </script>
     <script src="static/js/script.js"></script>
 </body>
 </html>
