@@ -1,36 +1,40 @@
-# EcoScan-AI: Waste Reuse Intelligence System
+# EcoScan AI
 
-An AI-powered system that analyzes waste objects and provides reuse/upcycling recommendations using Google Gemini API.
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="python" />
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="html5" />
+  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="css3" />
+</p>
 
-## Features
-- 📸 **Object Identification**: Uses Gemini Vision to identify waste items.
-- 🛡️ **Safety Assessment**: Analyzes materials and condition for human safety.
-- ✨ **AI Recommendations**: Generates personalized upcycling ideas with step-by-step instructions.
-- 🍃 **Impact Tracking**: Estimates CO₂ savings for each reuse case.
-- 💻 **Modern HTML5 Frontend**: A clean, responsive web interface built with vanilla HTML/CSS/JavaScript and Flask.
-- 💰 **Market Pricing**: Estimates fair market value for recycled products based on Indian market standards.
+## Overview
+EcoScan AI is an intelligent agent designed to promote sustainability. By using live camera input, it classifies waste materials in real-time and generates step-by-step recycling instructions. This project leverages prompt-engineered LLM pipelines to deliver accurate, actionable environmental guidance.
 
-## Quick Start
+## Key Features
+- **Live Object Detection:** Utilizes computer vision to analyze waste via camera feed.
+- **Smart Instructions:** Prompt-engineered LLM pipeline generates specific recycling instructions for detected materials.
+- **User-Friendly Interface:** Built with clean HTML5 and CSS3 for an intuitive user experience.
 
-1. **Get a Gemini API Key**: Visit [Google AI Studio](https://aistudio.google.com/app/apikey).
-2. **Configure Environment**:
-   Create a `.env` file in the root directory:
-   ```env
-   GEMINI_API_KEY=your_api_key_here
+## Tech Stack
+- **Frontend:** HTML5, CSS3
+- **Backend/AI:** Python, Computer Vision, Prompt Engineering, LLM API
+
+## Getting Started
+
+### Prerequisites
+- Python 3.8+
+- A working webcam.
+
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Sainitesh10/EcoScan-AI.git
    ```
-3. **Run the Application**:
-   Double-click `start.bat`
-   
-   The app will be available at `http://localhost:5000`.
-
-## Project Structure
-- `server.py`: Flask backend serving the HTML frontend and API.
-- `frontend/`: HTML, CSS, and JavaScript files.
-- `backend/`: Core logic for vision, reasoning, scoring, and pricing.
-- `requirements.txt`: Python dependencies.
-
-## Technologies Used
-- **Backend**: Python, Flask, Google Gemini API
-- **Frontend**: HTML5, CSS3, Vanilla JavaScript
-- **Image Processing**: PIL/Pillow
-- **Environment Management**: python-dotenv
+2. Install the required Python packages:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Add your LLM API keys to your environment variables.
+4. Start the application:
+   ```bash
+   python app.py
+   ```
